@@ -1,20 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { RegistrationScreen } from "./RegistrationScreen";
+import { SignInScreen } from "./SignInScreen ";
+import { CreateNoteScreen } from "./CreateNoteScreen ";
+import { ViewNotesScreen } from "./ViewNotesScreen";
+import { HomeUi } from "./HomeUi";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Alert } from "react-native";
+import React, { useState, useEffect } from "react";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+const Stack = createNativeStackNavigator();
+function App({}) {
+  var ui = (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="SignInScreen " component={SignInScreen} />
+
+        <Stack.Screen name="Home" component={HomeUi} />
+
+        <Stack.Screen
+          name="RegistrationScreen"
+          component={RegistrationScreen}
+        />
+        <Stack.Screen name="CreateNoteScreen" component={CreateNoteScreen} />
+        <Stack.Screen name="ViewNotesScreen" component={ViewNotesScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
+
+  return ui;
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
